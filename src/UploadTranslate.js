@@ -41,8 +41,47 @@ const UploadTranslate = () => {
         }
     };
 
-    const handleTranslate = () => {
-        setTranslation("N O K I A");
+    const handleTranslate = async () => {
+        if (images.length === 0) return;
+
+        setTranslation("Translating..."); // Show loading state
+
+        try {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const userId = user?.user_id;
+
+            if (!userId) {
+                setTranslation("User not logged in.");
+                return;
+            }
+
+            const formData = new FormData();
+            for (let imageUrl of images) {
+                const blob = await fetch(imageUrl).then(res => res.blob());
+                formData.append("image", blob, "image.png"); // Append each image
+            }
+            formData.append("user_id", userId);
+            formData.append("source_type", "upload");
+
+            const response = await fetch("http://127.0.0.1:5000/predict", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+            console.log("Backend Response:", data);
+
+            if (!data.prediction) {
+                setTranslation("Translation failed.");
+                return;
+            }
+
+            setTranslation(data.prediction);
+
+        } catch (error) {
+            console.error("Translation failed:", error);
+            setTranslation("Error translating. Try again.");
+        }
     };
 
     const { getRootProps, getInputProps } = useDropzone({
@@ -53,11 +92,10 @@ const UploadTranslate = () => {
 
     return (
         <div className="upload-container">
-            <BackButton className="back-button"/>
             <h1 className="upload-title">Upload & Translate</h1>
 
             <div {...getRootProps()} className="upload-box">
-                <input {...getInputProps()} />
+                <input {...getInputProps()} multiple /> {/* Important: add 'multiple' to the input */}
                 <p>Click to upload PNG images</p>
             </div>
 

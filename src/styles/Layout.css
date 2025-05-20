@@ -1,0 +1,130 @@
+/* src/styles/Layout.css */
+
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+.navbar {
+    width: 200px;
+    background-color: #282c34;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.nav-buttons {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.nav-buttons li {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.nav-buttons a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.nav-buttons a:hover {
+    background-color: #1e40af;
+}
+
+.page-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+/* src/styles/Layout.css */
+
+/* Same styles as before for .layout, .navbar, etc */
+
+.auth-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Dark background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.auth-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.auth-modal input {
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.auth-modal button {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.auth-message {
+    color: red;
+    margin-top: 0.5rem;
+}
+
+/* Blur background when auth modal is active */
+.blurred {
+    filter: blur(4px);
+    pointer-events: none;
+    user-select: none;
+}
+.logout-container {
+    margin-top: auto;
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 0;
+}
+
+.logout-button {
+    background-color: #051a67;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.logout-button:hover {
+    background-color: #1e40af;
+}
